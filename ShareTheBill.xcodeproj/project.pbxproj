@@ -13,6 +13,7 @@
 		81612727298BD22200BEA301 /* CalculationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81612726298BD22200BEA301 /* CalculationView.swift */; };
 		81612729298BF20F00BEA301 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81612728298BF20F00BEA301 /* Result.swift */; };
 		8161272B298BF33600BEA301 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8161272A298BF33600BEA301 /* ResultView.swift */; };
+		8161274E298C344C00BEA301 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8161274D298C344C00BEA301 /* HistoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		81612726298BD22200BEA301 /* CalculationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationView.swift; sourceTree = "<group>"; };
 		81612728298BF20F00BEA301 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		8161272A298BF33600BEA301 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		8161274D298C344C00BEA301 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			children = (
 				81612726298BD22200BEA301 /* CalculationView.swift */,
 				8161272A298BF33600BEA301 /* ResultView.swift */,
+				8161274D298C344C00BEA301 /* HistoryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 			files = (
 				81612729298BF20F00BEA301 /* Result.swift in Sources */,
 				8161272B298BF33600BEA301 /* ResultView.swift in Sources */,
+				8161274E298C344C00BEA301 /* HistoryView.swift in Sources */,
 				81612727298BD22200BEA301 /* CalculationView.swift in Sources */,
 				81612717298BD09200BEA301 /* ShareTheBillApp.swift in Sources */,
 			);
