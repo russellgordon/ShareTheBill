@@ -257,6 +257,8 @@ struct CalculationView: View {
                     .font(.headline.smallCaps())
             })
             .buttonStyle(.bordered)
+            // Button stays greyed out so long as amount cannot be computed
+            .disabled(amountEachPersonPays == nil)
             
             Spacer()
             
