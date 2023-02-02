@@ -118,153 +118,156 @@ struct CalculationView: View {
     // Shows the user interface
     var body: some View {
         
-        VStack(spacing: 0) {
+        NavigationView {
             
-            Group {
+            VStack(spacing: 0) {
                 
-                HStack {
-                    Text("Bill Amount")
-                        .font(.headline.smallCaps())
+                Group {
                     
-                    Spacer()
-                }
-                .padding(.horizontal)
-                
-                HStack(spacing: 5) {
-                    Text("$")
-                    
-                    TextField("100.00", text: $providedBillAmount)  // Now a "live" binding
-                    // connected to providedBillAmount
-                }
-                .padding()
-                
-            }
-            
-            Group {
-                
-                HStack {
-                    Text("Tip Percentage")
-                        .font(.headline.smallCaps())
-                    
-                    Spacer()
-                }
-                .padding(.horizontal)
-                
-                Picker("Tip Percentage",
-                       selection: $selectedTipPercentage) { // Now a "live" binding
-                    // connected to "selectedTipPercentage"
-                    
-                    // tipPercentages array does not conform to Identifiable
-                    // However, by using the parameter "id" with argument "\.self"
-                    // we can "promise" SwiftUI that the values in the array will
-                    // all be unique.
-                    ForEach(tipPercentages, id: \.self) { currentPercentage in
-                        Text("\(currentPercentage)%")
-                            .tag(currentPercentage)
+                    HStack {
+                        Text("Bill Amount")
+                            .font(.headline.smallCaps())
+                        
+                        Spacer()
                     }
+                    .padding(.horizontal)
+                    
+                    HStack(spacing: 5) {
+                        Text("$")
+                        
+                        TextField("100.00", text: $providedBillAmount)  // Now a "live" binding
+                        // connected to providedBillAmount
+                    }
+                    .padding()
+                    
                 }
-                       .pickerStyle(.segmented)
-                       .padding()
                 
-            }
-            
-            Group {
+                Group {
+                    
+                    HStack {
+                        Text("Tip Percentage")
+                            .font(.headline.smallCaps())
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+                    
+                    Picker("Tip Percentage",
+                           selection: $selectedTipPercentage) { // Now a "live" binding
+                        // connected to "selectedTipPercentage"
+                        
+                        // tipPercentages array does not conform to Identifiable
+                        // However, by using the parameter "id" with argument "\.self"
+                        // we can "promise" SwiftUI that the values in the array will
+                        // all be unique.
+                        ForEach(tipPercentages, id: \.self) { currentPercentage in
+                            Text("\(currentPercentage)%")
+                                .tag(currentPercentage)
+                        }
+                    }
+                           .pickerStyle(.segmented)
+                           .padding()
+                    
+                }
                 
-                HStack {
-                    Text("Total with Tip")
+                Group {
+                    
+                    HStack {
+                        Text("Total with Tip")
+                            .font(.headline.smallCaps())
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+                    
+                    HStack(spacing: 5) {
+                        Text("$")
+                        
+                        Text(totalWithTipFormatted)
+                        
+                        Spacer()
+                    }
+                    .padding()
+                    
+                }
+                
+                Group {
+                    
+                    HStack {
+                        Text("How many people?")
+                            .font(.headline.smallCaps())
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+                    
+                    // Now a "live" binding connected to "peopleCount"
+                    Stepper("\(peopleCount)",
+                            value: $peopleCount,
+                            in: 2...20)
+                    .padding()
+                    
+                }
+                
+                Group {
+                    
+                    HStack {
+                        Text("Each person Pays...")
+                            .font(.headline.smallCaps())
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+                    
+                    HStack(spacing: 5) {
+                        Text("$")
+                        
+                        Text(amountEachPersonPaysFormatted)
+                        
+                        Spacer()
+                    }
+                    .padding()
+                    
+                }
+                
+                Button(action: {
+                    
+                    // Create a string version of the bill amount
+                    guard let amount = billAmount else {
+                        return
+                    }
+                    let amountFormatted = String( amount.formatted(.number.precision(.fractionLength(2))))
+                    
+                    // Create a string version of the percentage
+                    let percentage = String(selectedTipPercentage)
+                    
+                    // Create a string version of the people count
+                    let people = String(peopleCount)
+                    
+                    // Create the prior result, all put together into an instance of Result
+                    let priorResult = Result(billAmount: amountFormatted,
+                                             percentage: percentage,
+                                             totalWithTip: totalWithTipFormatted,
+                                             peopleCount: people,
+                                             amountPerPerson: amountEachPersonPaysFormatted)
+                    
+                    // Save the prior result to the history
+                    history.append(priorResult)
+                    
+                }, label: {
+                    Text("Save")
                         .font(.headline.smallCaps())
-                    
-                    Spacer()
-                }
-                .padding(.horizontal)
+                })
+                .buttonStyle(.bordered)
+                // Button stays greyed out so long as amount cannot be computed
+                .disabled(amountEachPersonPays == nil)
                 
-                HStack(spacing: 5) {
-                    Text("$")
-                    
-                    Text(totalWithTipFormatted)
-                    
-                    Spacer()
-                }
-                .padding()
+                Spacer()
                 
             }
-            
-            Group {
-                
-                HStack {
-                    Text("How many people?")
-                        .font(.headline.smallCaps())
-                    
-                    Spacer()
-                }
-                .padding(.horizontal)
-                
-                // Now a "live" binding connected to "peopleCount"
-                Stepper("\(peopleCount)",
-                        value: $peopleCount,
-                        in: 2...20)
-                .padding()
-                
-            }
-            
-            Group {
-                
-                HStack {
-                    Text("Each person Pays...")
-                        .font(.headline.smallCaps())
-                    
-                    Spacer()
-                }
-                .padding(.horizontal)
-                
-                HStack(spacing: 5) {
-                    Text("$")
-                    
-                    Text(amountEachPersonPaysFormatted)
-                    
-                    Spacer()
-                }
-                .padding()
-                
-            }
-            
-            Button(action: {
-                
-                // Create a string version of the bill amount
-                guard let amount = billAmount else {
-                    return
-                }
-                let amountFormatted = String( amount.formatted(.number.precision(.fractionLength(2))))
-                
-                // Create a string version of the percentage
-                let percentage = String(selectedTipPercentage)
-                
-                // Create a string version of the people count
-                let people = String(peopleCount)
-                
-                // Create the prior result, all put together into an instance of Result
-                let priorResult = Result(billAmount: amountFormatted,
-                                         percentage: percentage,
-                                         totalWithTip: totalWithTipFormatted,
-                                         peopleCount: people,
-                                         amountPerPerson: amountEachPersonPaysFormatted)
-                
-                // Save the prior result to the history
-                history.append(priorResult)
-                
-            }, label: {
-                Text("Save")
-                    .font(.headline.smallCaps())
-            })
-            .buttonStyle(.bordered)
-            // Button stays greyed out so long as amount cannot be computed
-            .disabled(amountEachPersonPays == nil)
-            
-            Spacer()
-            
+            .padding(.top, 10)
+            .navigationTitle("Share the Bill")
         }
-        .padding(.top, 10)
-        .navigationTitle("Share the Bill")
     }
 }
 

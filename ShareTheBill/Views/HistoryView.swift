@@ -16,10 +16,12 @@ struct HistoryView: View {
     // MARK: Computed properties
     var body: some View {
         
-        List(history.reversed()) { somePriorResult in
-            ResultView(priorResult: somePriorResult)
+        NavigationView {
+            List(history.reversed()) { somePriorResult in
+                ResultView(priorResult: somePriorResult)
+            }
+            .navigationTitle("History")
         }
-        .navigationTitle("History")
 
     }
 }

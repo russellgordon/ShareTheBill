@@ -16,22 +16,20 @@ struct ShareTheBillApp: App {
     // MARK: Computed properties
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                TabView {
-                    
-                    CalculationView(history: $history)
-                        .tabItem {
-                            Image(systemName: "rectangle.split.2x2.fill")
-                            Text("Calculate")
-                        }
-                    
-                    HistoryView(history: $history)
-                        .tabItem {
-                            Image(systemName: "clock.fill")
-                            Text("History")
-                        }
-
-                }
+            TabView {
+                
+                CalculationView(history: $history)
+                    .tabItem {
+                        Image(systemName: "rectangle.split.2x2.fill")
+                        Text("Calculate")
+                    }
+                
+                HistoryView(history: $history)
+                    .tabItem {
+                        Image(systemName: "clock.fill")
+                        Text("History")
+                    }
+                
             }
         }
     }
