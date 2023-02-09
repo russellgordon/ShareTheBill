@@ -273,8 +273,6 @@ struct CalculationView: View {
 
 struct CalculationView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            CalculationView(history: Binding.constant([exampleResultForPreviews]))
-        }
+        CalculationView(history: Binding.constant([exampleResultForPreviews]))
     }
 }

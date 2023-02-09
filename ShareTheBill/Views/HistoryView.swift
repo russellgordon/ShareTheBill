@@ -17,12 +17,20 @@ struct HistoryView: View {
     var body: some View {
         
         NavigationView {
-            List(history.reversed()) { somePriorResult in
-                ResultView(priorResult: somePriorResult)
+            List {
+                ForEach(history.reversed()) { somePriorResult in
+                    ResultView(priorResult: somePriorResult)
+                }
+                .onDelete(perform: delete)
             }
             .navigationTitle("History")
         }
 
+    }
+    
+    // MARK: Functions
+    func delete(at offsets: IndexSet) {
+        history.remove(atOffsets: offsets)
     }
 }
 
