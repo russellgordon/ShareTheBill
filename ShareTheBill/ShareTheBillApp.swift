@@ -11,7 +11,8 @@ import SwiftUI
 struct ShareTheBillApp: App {
     
     // MARK: Stored properties
-    @State var history: [Result] = []   // Begins as empty list
+    // Begins as empty list
+    @State var history: [Result] = []
     
     // MARK: Computed properties
     var body: some Scene {

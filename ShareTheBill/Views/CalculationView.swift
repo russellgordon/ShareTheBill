@@ -11,6 +11,9 @@ struct CalculationView: View {
     
     // MARK: Stored properties
     
+    // Stores the history of tip calculations
+    @Binding var history: [Result]
+    
     // How much was the bill?
     @State var providedBillAmount = ""
     
@@ -22,9 +25,6 @@ struct CalculationView: View {
     
     // How many people are splitting this bill?
     @State var peopleCount = 2
-    
-    // Stores the history of tip calculations
-    @Binding var history: [Result]
     
     // MARK: Computed properties
     

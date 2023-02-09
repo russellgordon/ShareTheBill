@@ -10,6 +10,7 @@ import SwiftUI
 struct HistoryView: View {
     
     // MARK: Stored properties
+    
     // Connect to the source of truth at app entry point
     @Binding var history: [Result]
     
